@@ -1,5 +1,6 @@
 echo $PATH
 echo `which node`
+find /tmp/codon/vendor
 
 build_dir=$1
 
