@@ -4,6 +4,7 @@ echo $PATH
 echo `which node`
 find $build_dir
 
+export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
+
 cd $build_dir
-export PATH=./node_modules/.bin:$PATH
 cake buildpack
