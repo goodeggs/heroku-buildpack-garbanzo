@@ -1,4 +1,4 @@
 # run buildpack cake task
 cd $BUILD_DIR
 export PATH="./node_modules/.bin:$PATH"
-cake buildpack
+./node_modules/.bin/cake buildpack
