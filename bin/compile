@@ -1,9 +1,5 @@
 build_dir=$1
 
-echo $PATH
-echo `which node`
-find $build_dir
-
 export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
 
 cd $build_dir
