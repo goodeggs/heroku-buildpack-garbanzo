@@ -1,9 +1,9 @@
-echo $PATH
-echo `which node`
-find /tmp/codon/vendor
-
 build_dir=$1
 
+echo $PATH
+echo `which node`
+find $build_dir
+
 cd $build_dir
-export PATH="./node_modules/.bin:$PATH"
+export PATH=./node_modules/.bin:$PATH
 cake buildpack
