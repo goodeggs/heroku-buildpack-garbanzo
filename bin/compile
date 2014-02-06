@@ -1,7 +1,33 @@
+#!/usr/bin/env bash
+
+set -e            # fail fast
+set -o pipefail   # don't ignore exit codes when piping output
+# set -x          # enable debugging
+
+# Configure directories
 build_dir=$1
+cache_dir=$2
+env_dir=$3
 
-export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
+bp_dir=$(cd $(dirname $0); cd ..; pwd)
 
+# Load helpers
+source $bp_dir/bin/common.sh
+
+# Everything else happens in the build_dir
 cd $build_dir
-npm install bcrypt
-cake buildpack
+
+# Scope config var availability
+(
+  if [ -d "$env_dir" ]; then
+     status "Exporting config vars to environment"
+     export_env_dir $env_dir
+  fi
+  export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
+
+  status "Forcing 'npm install bcrypt'"
+  npm install bcrypt 2>&1 | indent
+
+  status "Running 'grunt buildpack'"
+  grunt buildpack 2>&1 | indent
+)
