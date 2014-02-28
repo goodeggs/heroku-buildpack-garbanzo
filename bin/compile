@@ -26,7 +26,7 @@ cd $build_dir
   export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
 
   status "Forcing 'npm install bcrypt'"
-  npm install bcrypt 2>&1 | indent
+  npm install --userconfig $build_dir/.npmrc bcrypt 2>&1 | indent
 
   status "Running 'grunt buildpack'"
   grunt buildpack 2>&1 | indent
