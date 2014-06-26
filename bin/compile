@@ -26,7 +26,7 @@ cd $build_dir
   export PATH=$build_dir/node_modules/.bin:$build_dir/vendor/node/bin:$PATH
 
   for runner in gulp grunt cake; do
-    `which -s $runner`; if [ $? -eq 0 ]; then
+    if [ -x $build_dir/node_modules/.bin/$runner ]; then
       status "Running '$runner buildpack'"
       $runner buildpack 2>&1 | indent
       break
